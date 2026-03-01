@@ -62,11 +62,70 @@ body{
   display:flex;
   justify-content:center;
   padding:80px 20px;
+  position:relative;
+  overflow:hidden;
 }
 
 .wrapper{
   width:100%;
   max-width:380px;
+  position:relative;
+  z-index:1;
+}
+
+.night-sky{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+}
+
+.night-sky::before,
+.night-sky::after{
+  content:"";
+  position:absolute;
+  width:2px;
+  height:2px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.75);
+  animation:starDrift 48s linear infinite;
+}
+
+.night-sky::before{
+  box-shadow:
+    6vw 82vh rgba(255,255,255,0.65),
+    14vw 68vh rgba(255,255,255,0.55),
+    20vw 90vh rgba(255,255,255,0.7),
+    28vw 76vh rgba(255,255,255,0.5),
+    36vw 88vh rgba(255,255,255,0.6),
+    46vw 72vh rgba(255,255,255,0.5),
+    56vw 84vh rgba(255,255,255,0.65),
+    64vw 66vh rgba(255,255,255,0.5),
+    74vw 92vh rgba(255,255,255,0.6),
+    84vw 78vh rgba(255,255,255,0.55),
+    92vw 86vh rgba(255,255,255,0.7);
+}
+
+.night-sky::after{
+  opacity:0.6;
+  animation-duration:62s;
+  box-shadow:
+    10vw 94vh rgba(255,255,255,0.5),
+    22vw 80vh rgba(255,255,255,0.45),
+    34vw 96vh rgba(255,255,255,0.55),
+    48vw 86vh rgba(255,255,255,0.45),
+    60vw 98vh rgba(255,255,255,0.5),
+    72vw 82vh rgba(255,255,255,0.4),
+    86vw 94vh rgba(255,255,255,0.55);
+}
+
+@keyframes starDrift{
+  from{
+    transform:translate(-16vw, 16vh);
+  }
+  to{
+    transform:translate(16vw, -16vh);
+  }
 }
 
 h1{
@@ -271,6 +330,8 @@ input:focus{
 </head>
 
 <body>
+
+<div class="night-sky" aria-hidden="true"></div>
 
 <div class="wrapper">
   <h1>Quantum ID</h1>
