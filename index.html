@@ -1,9 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-IN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quantum ID</title>
+<title>Quantum ID | Silicon University Student ID & Contacts | Bhubaneswar</title>
+<meta name="description" content="Quantum ID helps search Silicon University students in Bhubaneswar, Odisha by name, SIC/ID, mobile, and student email.">
+<meta name="keywords" content="Silicon University student search, Silicon ID, student contacts, Bhubaneswar Odisha students, Quantum ID">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="Quantum ID">
+<meta name="geo.region" content="IN-OR">
+<meta name="geo.placename" content="Bhubaneswar">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_IN">
+<meta property="og:site_name" content="Quantum ID">
+<meta property="og:title" content="Quantum ID | Silicon University Student ID & Contacts">
+<meta property="og:description" content="Search Silicon University students by name, SIC/ID, phone number, and email in Bhubaneswar, Odisha.">
+<meta property="og:image" content="https://img.icons8.com/bubbles/100/id-man-with-yellow-glasses.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Quantum ID | Silicon University Student ID & Contacts">
+<meta name="twitter:description" content="Search Silicon University students by name, SIC/ID, mobile, and student mail.">
+<meta name="twitter:image" content="https://img.icons8.com/bubbles/100/id-man-with-yellow-glasses.png">
+<meta name="theme-color" content="#0f0f0f">
+<link rel="icon" type="image/png" href="https://img.icons8.com/bubbles/100/id-man-with-yellow-glasses.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "Quantum ID",
+      "description": "Search Silicon University students by name, SIC/ID, mobile, and student email.",
+      "inLanguage": "en-IN"
+    },
+    {
+      "@type": "EducationalOrganization",
+      "name": "Silicon University",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Bhubaneswar",
+        "addressRegion": "Odisha",
+        "addressCountry": "IN"
+      }
+    }
+  ]
+}
+</script>
 
 <style>
 *{
@@ -29,9 +71,28 @@ body{
 
 h1{
   text-align:center;
-  margin-bottom:30px;
+  margin-bottom:10px;
   letter-spacing:2px;
   font-weight:600;
+}
+
+.page-subtitle{
+  text-align:center;
+  color:#a0a0a0;
+  font-size:13px;
+  line-height:1.6;
+  margin-bottom:22px;
+}
+
+.sr-only{
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0, 0, 0, 0);
+  border:0;
 }
 
 /* Search */
@@ -83,6 +144,26 @@ input:focus{
   margin-bottom:8px;
 }
 
+.history-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:8px;
+}
+
+.clear-history-btn{
+  background:transparent;
+  border:none;
+  color:#888;
+  font-size:12px;
+  cursor:pointer;
+  padding:2px 4px;
+}
+
+.clear-history-btn:hover{
+  color:#bbb;
+}
+
 .history-list{
   display:flex;
   flex-wrap:wrap;
@@ -96,10 +177,27 @@ input:focus{
   font-size:12px;
   cursor:pointer;
   transition:0.3s;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
 }
 
 .history-chip:hover{
   background:#2a2a2a;
+}
+
+.chip-close{
+  border:none;
+  background:transparent;
+  color:#aaa;
+  font-size:14px;
+  line-height:1;
+  cursor:pointer;
+  padding:0;
+}
+
+.chip-close:hover{
+  color:#fff;
 }
 
 /* Card */
@@ -176,13 +274,18 @@ input:focus{
 
 <div class="wrapper">
   <h1>Quantum ID</h1>
+  <p class="page-subtitle">Silicon University student directory for quick ID, name, and contact lookup.</p>
 
-  <input type="text" id="nameInput" placeholder="Search name..." oninput="searchByName()">
+  <p class="sr-only">Search Silicon University students by name, SIC ID, mobile number, student email, and branch.</p>
+  <input type="text" id="nameInput" placeholder="Search by name, SIC, phone or email..." oninput="searchByName()" aria-label="Search Silicon University students by name, SIC, phone, or email">
   <div class="suggestions" id="suggestions"></div>
 
   <!-- History Section -->
   <div class="history-section" id="historySection">
-    <div class="history-title">Recent Searches</div>
+    <div class="history-header">
+      <div class="history-title">Recent Searches</div>
+      <button class="clear-history-btn" id="clearHistoryBtn" onclick="clearHistory()">Clear all</button>
+    </div>
     <div class="history-list" id="historyList"></div>
   </div>
 
@@ -201,15 +304,15 @@ input:focus{
 
     <div class="icon-links">
       <a id="callBtn">
-        <img src="https://img.icons8.com/hands/100/phone.png">
+        <img src="https://img.icons8.com/hands/100/phone.png" alt="Call student">
       </a>
 
       <a id="whatsappBtn">
-        <img src="https://img.icons8.com/color/48/whatsapp--v1.png">
+        <img src="https://img.icons8.com/color/48/whatsapp--v1.png" alt="WhatsApp student">
       </a>
 
       <a id="mailBtn">
-        <img src="https://img.icons8.com/fluency/48/gmail-new.png">
+        <img src="https://img.icons8.com/fluency/48/gmail-new.png" alt="Email student">
       </a>
     </div>
 
@@ -253,6 +356,7 @@ function renderHistory(){
   const history = JSON.parse(localStorage.getItem("searchHistory")) || [];
   const historySection = document.getElementById("historySection");
   const historyList = document.getElementById("historyList");
+  const clearHistoryBtn = document.getElementById("clearHistoryBtn");
 
   historyList.innerHTML = "";
 
@@ -262,14 +366,40 @@ function renderHistory(){
   }
 
   historySection.style.display = "block";
+  clearHistoryBtn.style.display = "inline-block";
 
   history.forEach(student => {
     const chip = document.createElement("div");
     chip.className = "history-chip";
-    chip.innerText = student.name;
     chip.onclick = () => showStudent(student);
+
+    const chipText = document.createElement("span");
+    chipText.innerText = student.name;
+
+    const closeBtn = document.createElement("button");
+    closeBtn.className = "chip-close";
+    closeBtn.innerText = "×";
+    closeBtn.onclick = (event) => {
+      event.stopPropagation();
+      removeHistoryItem(student.sic);
+    };
+
+    chip.appendChild(chipText);
+    chip.appendChild(closeBtn);
     historyList.appendChild(chip);
   });
+}
+
+function removeHistoryItem(sic){
+  let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
+  history = history.filter(student => student.sic !== sic);
+  localStorage.setItem("searchHistory", JSON.stringify(history));
+  renderHistory();
+}
+
+function clearHistory(){
+  localStorage.removeItem("searchHistory");
+  renderHistory();
 }
 
 function showStudent(student){
@@ -303,7 +433,19 @@ function searchByName(){
   }
 
   const matches = studentsData
-    .filter(student => normalize(student.name).includes(input))
+    .filter(student => {
+      const searchableFields = [
+        student.name,
+        student.sic,
+        student.mobile,
+        student.student_mail,
+        student.branch
+      ];
+
+      return searchableFields.some(field =>
+        normalize(String(field || "")).includes(input)
+      );
+    })
     .slice(0,8);
 
   suggestionBox.style.display = matches.length ? "block" : "none";
