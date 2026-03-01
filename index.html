@@ -23,16 +23,28 @@
 <meta name="theme-color" content="#0f0f0f">
 <link rel="icon" type="image/png" href="https://img.icons8.com/bubbles/100/id-man-with-yellow-glasses.png">
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WTKJN5JXDG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-WTKJN5JXDG', {
+  page_path: window.location.pathname,
+});
+</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "WebSite",
-      "name": "Quantum ID",
-      "description": "Search Silicon University students by name, SIC/ID, mobile, and student email.",
-      "inLanguage": "en-IN"
-    },
+  "@type": "WebSite",
+  "name": "Quantum ID",
+  "url": "https://quantum-id.netlify.app",
+  "description": "Search Silicon University students by name, SIC/ID, mobile, and student email.",
+  "inLanguage": "en-IN"
+},
     {
       "@type": "EducationalOrganization",
       "name": "Silicon University",
@@ -476,7 +488,11 @@ function showStudent(student){
   document.getElementById("whatsappBtn").href = `https://wa.me/${student.mobile}`;
   document.getElementById("mailBtn").href = `mailto:${student.student_mail}`;
 
-  document.getElementById("profileCard").style.display = "block";
+  const card = document.getElementById("profileCard");
+  card.style.display = "block";
+
+  // 🔥 Add this line
+  card.scrollIntoView({ behavior: "smooth" });
 
   saveSearch(student);
 }
